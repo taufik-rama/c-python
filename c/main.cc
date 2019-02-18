@@ -7,11 +7,16 @@ int main(int argc, char const *argv[]) {
     PyRun_SimpleString("import sys");
     PyRun_SimpleString("sys.path.append('.')");
 
-    PyObject *myModuleString = PyUnicode_FromString("app");
-    PyObject *myModule = PyImport_Import(myModuleString);
+    PyObject *module = PyImport_Import(PyUnicode_FromString("app"));
 
-    PyObject *myFunction = PyObject_GetAttrString(myModule, "print_text");
-    PyObject* myResult = PyObject_CallObject(myFunction, NULL);
+    PyObject *print_text = PyObject_GetAttrString(module, "print_text");
+    long result = PyLong_AsLong(PyObject_CallObject(print_text, NULL));
+    if(!result) {
+        PyErr_Print();
+        return -1;
+    }
+
+    printf("print_text(): %ld\n", result);
 
     // FILE *file = fopen("app.py", "r");
     // if (file != NULL) {
