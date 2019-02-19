@@ -1,1 +1,5 @@
-boost-source/
+python
+*.a
+*.o
+*.pyc
+__pycache__
