@@ -1,5 +1,6 @@
 python
 *.a
+!python-build/*.a
 *.o
 *.pyc
 __pycache__
